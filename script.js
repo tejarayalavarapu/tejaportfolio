@@ -48,7 +48,6 @@ const phrases = [
   'Machine Learning Researcher',
   'Published ML Author',
   'Cloud & IoT Engineer',
-  'IEEE Member',
 ];
 
 let phraseIdx = 0;
@@ -191,7 +190,7 @@ if (window.matchMedia('(pointer: fine)').matches) {
     width: 300px;
     height: 300px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(108,99,255,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--cursor-glow) 0%, transparent 70%);
     transform: translate(-50%, -50%);
     transition: opacity 0.3s;
     left: -300px; top: -300px;
@@ -210,3 +209,27 @@ if (window.matchMedia('(pointer: fine)').matches) {
   }
   animGlow();
 }
+
+/* ============================================
+   THEME TOGGLE
+   ============================================ */
+const themeToggle = document.getElementById('themeToggle');
+const savedTheme = localStorage.getItem('theme');
+
+// Set initial theme
+if (savedTheme === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+} else {
+  document.documentElement.setAttribute('data-theme', 'light');
+}
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme');
+  let newTheme = 'light';
+  if (currentTheme === 'light') {
+    newTheme = 'dark';
+  }
+  
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+});
